@@ -1,0 +1,582 @@
+.container {
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+.content {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.headerText h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.headerText p {
+  color: #6b7280;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.buttonPrimary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.buttonPrimary:hover {
+  background-color: #1d4ed8;
+}
+
+.buttonSecondary {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.buttonSecondary:hover {
+  background-color: #e5e7eb;
+}
+
+.buttonIcon {
+  height: 1rem;
+  width: 1rem;
+  margin-right: 0.5rem;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .summaryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .summaryGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .chartsGrid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.chartContainer {
+  height: 16rem;
+}
+
+.periodButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.periodButton {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.periodButtonActive {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+
+.periodButtonInactive {
+  color: #6b7280;
+  background-color: transparent;
+}
+
+.periodButtonInactive:hover {
+  background-color: #f3f4f6;
+}
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16rem;
+}
+
+.spinnerIcon {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid transparent;
+  border-top: 2px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.allocationList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.allocationItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.allocationLeft {
+  display: flex;
+  align-items: center;
+}
+
+.allocationColor {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+.allocationSymbol {
+  font-weight: 500;
+}
+
+.allocationRight {
+  text-align: right;
+}
+
+.allocationPercentage {
+  font-weight: 500;
+}
+
+.allocationValue {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.assetsTable {
+  overflow-x: auto;
+}
+
+.tableContainer {
+  overflow-x: auto;
+}
+
+.table {
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.tableHead {
+  background-color: #f9fafb;
+}
+
+.tableHeader {
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tableBody {
+  background-color: white;
+}
+
+.tableRow {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tableRow:hover {
+  background-color: #f9fafb;
+}
+
+.tableCell {
+  padding: 1rem 1.5rem;
+  white-space: nowrap;
+}
+
+.assetInfo {
+  display: flex;
+  align-items: center;
+}
+
+.assetAvatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #dbeafe;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+}
+
+.assetAvatarText {
+  color: #2563eb;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.assetSymbol {
+  font-weight: 500;
+  color: #111827;
+}
+
+.assetType {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.priceInfo,
+.valueInfo,
+.returnInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.currentPrice,
+.currentValue,
+.returnValue {
+  font-weight: 500;
+}
+
+.purchasePrice,
+.costValue,
+.returnPercentage {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.sharesCell {
+  font-weight: 500;
+}
+
+.allocationContainer {
+  display: flex;
+  align-items: center;
+}
+
+.allocationBar {
+  width: 3rem;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  height: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.allocationProgress {
+  background-color: #2563eb;
+  height: 0.5rem;
+  border-radius: 9999px;
+}
+
+.allocationText {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.allocationPercentage {
+  color: #6b7280;
+}
+
+/* Error Container */
+.errorContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorContent {
+  text-align: center;
+}
+
+.errorTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.errorMessage {
+  color: #6b7280;
+  margin-top: 0.5rem;
+}
+
+/* Summary Card Styles */
+.summaryCardContent {
+  display: flex;
+  align-items: center;
+}
+
+.summaryCardIcon {
+  flex-shrink: 0;
+}
+
+.iconContainer {
+  width: 2rem;
+  height: 2rem;
+  background-color: #dbeafe;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: #2563eb;
+}
+
+.summaryCardInfo {
+  margin-left: 1rem;
+  flex: 1;
+}
+
+.summaryCardTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.summaryCardValueRow {
+  display: flex;
+  align-items: center;
+}
+
+.summaryCardValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.summaryCardChange {
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Table Actions */
+.tableActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.searchContainer {
+  position: relative;
+}
+
+.searchInput {
+  padding-left: 2.25rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.searchInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #3b82f6;
+  border-color: transparent;
+}
+
+.sortSelect {
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.sortSelect:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #3b82f6;
+}
+
+/* Loading States */
+.loadingContainer {
+  padding: 1rem 0;
+}
+
+.loadingRow {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.loadingLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loadingAvatar {
+  width: 3rem;
+  height: 3rem;
+  background-color: #e5e7eb;
+  border-radius: 50%;
+}
+
+.loadingTextLarge {
+  width: 4rem;
+  height: 1rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.loadingTextSmall {
+  width: 6rem;
+  height: 0.75rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+}
+
+.loadingTextMedium {
+  width: 5rem;
+  height: 1rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.emptyIcon {
+  height: 3rem;
+  width: 3rem;
+  color: #9ca3af;
+  margin: 0 auto 1rem;
+}
+
+.emptyTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.emptyMessage {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Skeleton Styles */
+.skeletonContainer {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonHeader {
+  margin-bottom: 2rem;
+}
+
+.skeletonCharts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .skeletonCharts {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.skeletonChartLarge {
+  grid-column: span 2 / span 2;
+}
+
+@media (min-width: 1024px) {
+  .skeletonChartLarge {
+    grid-column: span 1 / span 1;
+  }
+}
+
+.skeletonContent {
+  width: 100%;
+  height: 16rem;
+  background-color: #e5e7eb;
+  border-radius: 0.5rem;
+}

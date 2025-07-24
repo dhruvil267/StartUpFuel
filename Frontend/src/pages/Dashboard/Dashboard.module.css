@@ -1,0 +1,777 @@
+.container {
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+.headerSection {
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 0;
+}
+
+.content {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.headerText h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.headerText p {
+  color: #6b7280;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .summaryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .summaryGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .chartsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.cardLink {
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.cardLink:hover {
+  color: #1d4ed8;
+}
+
+.chartContainer {
+  height: 18.75rem;
+}
+
+.periodButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.periodButton {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.periodButtonActive {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+
+.periodButtonInactive {
+  color: #6b7280;
+  background-color: transparent;
+}
+
+.periodButtonInactive:hover {
+  background-color: #f3f4f6;
+}
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16rem;
+}
+
+.spinnerIcon {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid transparent;
+  border-top: 2px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.portfolioCardContent {
+  display: flex;
+  align-items: center;
+}
+
+.portfolioCardIcon {
+  flex-shrink: 0;
+}
+
+.portfolioCardIconContainer {
+  width: 2rem;
+  height: 2rem;
+  background-color: #dbeafe;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portfolioCardIconSvg {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: #2563eb;
+}
+
+.portfolioCardDetails {
+  margin-left: 1rem;
+  flex: 1;
+}
+
+.portfolioCardLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.portfolioCardValue {
+  display: flex;
+  align-items: center;
+}
+
+.portfolioCardMainValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.portfolioCardChange {
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.portfolioCardChangePositive {
+  color: #059669;
+}
+
+.portfolioCardChangeNegative {
+  color: #dc2626;
+}
+
+.portfolioCardChangeNeutral {
+  color: #6b7280;
+}
+
+.allocationList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.allocationItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.allocationLeft {
+  display: flex;
+  align-items: center;
+}
+
+.allocationColor {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+.allocationSymbol {
+  font-weight: 500;
+}
+
+.allocationRight {
+  text-align: right;
+}
+
+.allocationPercentage {
+  font-weight: 500;
+}
+
+.allocationValue {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.transactionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.transactionItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.transactionLeft {
+  display: flex;
+  align-items: center;
+}
+
+.transactionIcon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.transactionIconBuy {
+  background-color: #fef3c7;
+}
+
+.transactionIconSell {
+  background-color: #fecaca;
+}
+
+.transactionIconDividend {
+  background-color: #dbeafe;
+}
+
+.transactionIconText {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.transactionIconTextBuy {
+  color: #d97706;
+}
+
+.transactionIconTextSell {
+  color: #dc2626;
+}
+
+.transactionIconTextDividend {
+  color: #2563eb;
+}
+
+.transactionDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.transactionSymbol {
+  font-weight: 500;
+}
+
+.transactionDate {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.transactionAmount {
+  font-weight: 500;
+}
+
+.transactionAmountPositive {
+  color: #059669;
+}
+
+.transactionAmountNegative {
+  color: #dc2626;
+}
+
+.reportsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.reportItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reportLeft {
+  display: flex;
+  align-items: center;
+}
+
+.reportIcon {
+  width: 2rem;
+  height: 2rem;
+  color: #9ca3af;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.reportDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.reportTitle {
+  font-weight: 500;
+}
+
+.reportDate {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.reportActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reportActionButton {
+  padding: 0.25rem;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.reportActionButton:hover {
+  color: #6b7280;
+}
+
+.reportActionIcon {
+  height: 1rem;
+  width: 1rem;
+}
+
+.loadingSkeleton {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.skeletonHeader {
+  background-color: white;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.skeletonHeaderContent {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.skeletonBox {
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+}
+
+.skeletonTitle {
+  width: 8rem;
+  height: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.skeletonSubtitle {
+  width: 12rem;
+  height: 1rem;
+}
+
+.skeletonAvatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+.skeletonContent {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .skeletonGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .skeletonGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.skeletonCard {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+.skeletonCardContent {
+  width: 100%;
+  height: 5rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+}
+
+.skeletonListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonListLeft {
+  display: flex;
+  align-items: center;
+}
+
+.skeletonListIcon {
+  width: 2rem;
+  height: 2rem;
+  background-color: #e5e7eb;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+.skeletonListDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.skeletonListText {
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+}
+
+.skeletonListTextLarge {
+  width: 8rem;
+  height: 1rem;
+}
+
+.skeletonListTextSmall {
+  width: 6rem;
+  height: 0.75rem;
+}
+
+.skeletonListRight {
+  width: 4rem;
+  height: 1rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+}
+
+/* Enhanced Skeleton Styles */
+.skeletonTitle {
+  width: 8rem;
+  height: 1.5rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonSubtitle {
+  width: 12rem;
+  height: 1rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonIconContainer {
+  width: 2rem;
+  height: 2rem;
+  background-color: #e5e7eb;
+  border-radius: 0.5rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonCardLabel {
+  width: 6rem;
+  height: 0.875rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonMainValue {
+  width: 5rem;
+  height: 1.5rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonChange {
+  width: 3rem;
+  height: 0.875rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  margin-left: 0.5rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonChartTitle {
+  width: 10rem;
+  height: 1.125rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonPeriodButton {
+  width: 2rem;
+  height: 1.5rem;
+  background-color: #e5e7eb;
+  border-radius: 0.375rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonChart {
+  width: 100%;
+  height: 100%;
+  background-color: #f3f4f6;
+  border-radius: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonChart::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 60%;
+  background: linear-gradient(45deg, #e5e7eb 25%, transparent 25%, transparent 75%, #e5e7eb 75%);
+  background-size: 20px 20px;
+  opacity: 0.3;
+}
+
+.skeletonPieChart {
+  width: 100%;
+  height: 100%;
+  background-color: #f3f4f6;
+  border-radius: 0.5rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonPieCenter {
+  width: 8rem;
+  height: 8rem;
+  border: 2rem solid #e5e7eb;
+  border-radius: 50%;
+  position: relative;
+}
+
+.skeletonPieCenter::before {
+  content: '';
+  position: absolute;
+  top: -2rem;
+  left: -2rem;
+  width: 8rem;
+  height: 8rem;
+  border: 2rem solid transparent;
+  border-top-color: #d1d5db;
+  border-right-color: #d1d5db;
+  border-radius: 50%;
+}
+
+.skeletonAllocationColor {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: #e5e7eb;
+  border-radius: 50%;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonAllocationSymbol {
+  width: 3rem;
+  height: 1rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonAllocationValue {
+  width: 4rem;
+  height: 1rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  margin-bottom: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonAllocationPercentage {
+  width: 3rem;
+  height: 0.875rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonViewAll {
+  width: 4rem;
+  height: 0.875rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonTransactionIcon {
+  width: 2rem;
+  height: 2rem;
+  background-color: #e5e7eb;
+  border-radius: 50%;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonTransactionSymbol {
+  width: 4rem;
+  height: 1rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  margin-bottom: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonTransactionDate {
+  width: 5rem;
+  height: 0.875rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonTransactionAmount {
+  width: 4rem;
+  height: 1rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonReportIcon {
+  width: 2rem;
+  height: 2rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonReportTitle {
+  width: 8rem;
+  height: 1rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  margin-bottom: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonReportDate {
+  width: 10rem;
+  height: 0.875rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeletonReportAction {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
