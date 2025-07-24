@@ -19,12 +19,8 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? ["https://yourdomain.com"]
-        : [
-            "http://localhost:3000",
-            "http://localhost:3001",
-            "http://localhost:5173",
-          ],
+        ? ["http://startupfuel-frontend.s3-website.ca-central-1.amazonaws.com"]
+        : ["http://localhost:5173"],
   })
 );
 
@@ -40,7 +36,7 @@ app.get("/health", (req, res) => {
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV || "development",
     uptime: process.uptime(),
-    version: "1.0.0"
+    version: "1.0.0",
   });
 });
 
