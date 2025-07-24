@@ -4,7 +4,6 @@ const database = require("../database/connection");
 
 const router = express.Router();
 
-// GET /api/portfolio - Get portfolio performance data
 router.get("/", authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
@@ -106,7 +105,6 @@ router.get("/", authenticateToken, async (req, res) => {
   }
 });
 
-// GET /api/portfolio/assets - Get detailed assets
 router.get("/assets", authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
@@ -137,7 +135,6 @@ router.get("/assets", authenticateToken, async (req, res) => {
   }
 });
 
-// GET /api/portfolio/performance - Get performance metrics
 router.get("/performance", authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
@@ -221,7 +218,6 @@ router.get("/performance", authenticateToken, async (req, res) => {
   }
 });
 
-// POST /api/portfolio/assets - Buy or Sell asset in portfolio
 router.post("/assets", authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
@@ -512,7 +508,6 @@ router.post("/assets", authenticateToken, async (req, res) => {
   }
 });
 
-// GET /api/portfolio/allocations - Get asset allocation percentages
 router.get("/allocations", authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;

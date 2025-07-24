@@ -42,17 +42,6 @@ const authenticateToken = async (req, res, next) => {
   }
 };
 
-// Authorization middleware for admin-only routes
-const requireAdmin = (req, res, next) => {
-  if (req.user && req.user.role === 'admin') {
-    next();
-  } else {
-    res.status(403).json({ 
-      error: 'Admin access required',
-      message: 'This endpoint requires admin privileges'
-    });
-  }
-};
 
 // Validation middleware
 const validateRequest = (schema) => {
@@ -70,6 +59,5 @@ const validateRequest = (schema) => {
 
 module.exports = {
   authenticateToken,
-  requireAdmin,
   validateRequest
 };

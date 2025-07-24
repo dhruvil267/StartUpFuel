@@ -7,7 +7,6 @@ const database = require('../database/connection');
 
 const router = express.Router();
 
-// Generate JWT token
 const generateToken = (user) => {
   return jwt.sign(
     { 
@@ -20,7 +19,6 @@ const generateToken = (user) => {
   );
 };
 
-// POST /api/auth/register - Register new user
 router.post('/register', async (req, res) => {
   try {
     const { email, password, firstName, lastName, role = 'investor' } = req.body;
@@ -98,7 +96,6 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// POST /api/auth/login - User login
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -153,7 +150,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// GET /api/auth/me - Get current user
 router.get('/me', authenticateToken, async (req, res) => {
   try {
     res.json({
@@ -175,7 +171,6 @@ router.get('/me', authenticateToken, async (req, res) => {
   }
 });
 
-// POST /api/auth/logout - Logout (client-side token removal)
 router.post('/logout', authenticateToken, (req, res) => {
   res.json({
     message: 'Logout successful',
