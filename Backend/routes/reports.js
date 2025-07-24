@@ -1,6 +1,5 @@
 const express = require("express");
 const { authenticateToken } = require("../middleware/auth");
-// Uncomment when you set up AWS SDK
 
 const AWS = require("aws-sdk");
 

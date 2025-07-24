@@ -1,5 +1,4 @@
 const express = require("express");
-const { PortfolioModel } = require("../database/models");
 const { authenticateToken } = require("../middleware/auth");
 const database = require("../database/connection");
 
