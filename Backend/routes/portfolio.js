@@ -277,7 +277,7 @@ router.post("/assets", authenticateToken, async (req, res) => {
     }
     const normalizedSymbol = symbol.toUpperCase();
     const transactionType = type.toLowerCase();
-    const totalAmount = shares * currentPrice; // Use current price for transaction amount
+    const totalAmount = shares * purchasePrice; // Use purchase price for transaction amount
     const transactionDate = new Date().toISOString().split("T")[0];
 
     // Get user's portfolio with current cash balance
@@ -457,9 +457,7 @@ router.post("/assets", authenticateToken, async (req, res) => {
       console.log(
         `Sell: Updated cash balance: $${currentCashBalance} -> $${newCashBalance} (added $${totalAmount})`
       );
-    }
-
-    // Record transaction
+    }    // Record transaction
     await database.query(
       `
       INSERT INTO transactions (
@@ -474,7 +472,7 @@ router.post("/assets", authenticateToken, async (req, res) => {
         normalizedSymbol,
         transactionType.toUpperCase(),
         shares,
-        currentPrice,
+        purchasePrice, // Use purchase price for consistency with total_amount calculation
         totalAmount,
         transactionDate,
         `${transactionType === "buy" ? "Bought" : "Sold"} ${shares} shares of ${
