@@ -18,12 +18,24 @@ app.use(helmet());
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.NODE_ENV === "production" 
-    ? [
-        "http://startupfuel-frontend.s3-website.ca-central-1.amazonaws.com",
-        "http://ec2-35-182-23-242.ca-central-1.compute.amazonaws.com"
-      ]
-    : ["http://localhost:5173", "http://localhost:3000", "http://localhost:80"],
+  origin: function (origin, callback) {
+    const allowedOrigins = process.env.NODE_ENV === "production" 
+      ? [
+          "http://startupfuel-frontend.s3-website.ca-central-1.amazonaws.com",
+          "http://ec2-35-182-23-242.ca-central-1.compute.amazonaws.com"
+        ]
+      : ["http://localhost:5173", "http://localhost:3000", "http://localhost:80"];
+    
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.warn(`CORS: Blocked request from origin: ${origin}`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200
 };
