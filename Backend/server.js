@@ -15,25 +15,20 @@ const PORT = process.env.PORT || 3000;
 
 // Security middleware
 app.use(helmet());
-// app.use(
-//   cors({
-//     origin:
-//       process.env.NODE_ENV === "production"
-//         ? ["http://startupfuel-frontend.s3-website.ca-central-1.amazonaws.com"]
-//         : ["http://localhost:5173"],
-//   })
-// );
 
- const cors = require('cors');
-   
-   // Allow your S3 frontend origin
-   const corsOptions = {
-     origin: 'http://startupfuel-frontend.s3-website.ca-central-1.amazonaws.com',
-     credentials: true,
-     optionsSuccessStatus: 200
-   };
-   
-   app.use(cors(corsOptions));
+// CORS configuration
+const corsOptions = {
+  origin: process.env.NODE_ENV === "production" 
+    ? [
+        "http://startupfuel-frontend.s3-website.ca-central-1.amazonaws.com",
+        "http://ec2-35-182-23-242.ca-central-1.compute.amazonaws.com"
+      ]
+    : ["http://localhost:5173", "http://localhost:3000", "http://localhost:80"],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 // Body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
