@@ -29,110 +29,219 @@ async function seedDatabase() {
       if (existingUser) {
         userId = existingUser.id;
         console.log('👤 Using existing demo user with ID:', userId);
+        
+        // Clear existing data for fresh seeding
+        await database.query('DELETE FROM portfolio_assets WHERE portfolio_id IN (SELECT id FROM portfolios WHERE user_id = ?)', [userId]);
+        await database.query('DELETE FROM transactions WHERE portfolio_id IN (SELECT id FROM portfolios WHERE user_id = ?)', [userId]);
+        await database.query('DELETE FROM reports WHERE user_id = ?', [userId]);
+        console.log('🗑️ Cleared existing data for fresh seeding');
       } else {
         throw error;
       }
     }
 
-    // Create portfolio
+    // Create portfolio with initial cash balance
     let portfolioId;
-    try {      const portfolio = await PortfolioModel.create(userId, {
+    const initialCashBalance = 100000.00; // $100,000 starting cash
+    
+    try {
+      const portfolio = await PortfolioModel.create(userId, {
         name: 'Primary Investment Portfolio',
-        total_value: 125000.50,
-        cash_balance: 100000.00
+        total_value: 0, // Will be calculated based on actual investments
+        cash_balance: initialCashBalance
       });
       portfolioId = portfolio.id;
       console.log('💼 Portfolio created with ID:', portfolioId);
     } catch (error) {
-      // Get existing portfolio
+      // Get existing portfolio and reset it
       const existingPortfolios = await PortfolioModel.getByUserId(userId);
       if (existingPortfolios.length > 0) {
         portfolioId = existingPortfolios[0].id;
-        console.log('💼 Using existing portfolio with ID:', portfolioId);
+        // Reset portfolio cash balance
+        await database.query(`
+          UPDATE portfolios 
+          SET cash_balance = ?, total_value = 0, updated_at = datetime('now')
+          WHERE id = ?
+        `, [initialCashBalance, portfolioId]);
+        console.log('💼 Reset existing portfolio with ID:', portfolioId);
       } else {
         throw error;
       }
-    }
-
-    // Add portfolio assets
-    const assets = [
-      { symbol: 'AAPL', shares: 50, purchase_price: 150.25, current_price: 175.30 },
-      { symbol: 'GOOGL', shares: 25, purchase_price: 2800.00, current_price: 2950.75 },
-      { symbol: 'TSLA', shares: 30, purchase_price: 800.50, current_price: 750.25 },
-      { symbol: 'MSFT', shares: 40, purchase_price: 300.00, current_price: 335.50 },
-      { symbol: 'AMZN', shares: 15, purchase_price: 3200.00, current_price: 3100.25 }
-    ];
-
-    for (const asset of assets) {
-      try {
-        await database.insert(`
-          INSERT OR IGNORE INTO portfolio_assets 
-          (portfolio_id, symbol, shares, purchase_price, current_price, purchase_date, created_at, updated_at)
-          VALUES (?, ?, ?, ?, ?, date('now', '-' || (ABS(RANDOM()) % 365) || ' days'), datetime('now'), datetime('now'))
-        `, [portfolioId, asset.symbol, asset.shares, asset.purchase_price, asset.current_price]);
-      } catch (error) {
-        console.log(`Asset ${asset.symbol} might already exist, skipping...`);
-      }
-    }
-    console.log('📈 Portfolio assets added');
-
-    // Add sample transactions
+    }    // Define transactions that will create our portfolio assets
+    // Total investment budget: ~$80,000 (keeping $20,000+ in cash)
     const transactions = [
+      // Initial investments
       {
         symbol: 'AAPL',
         transaction_type: 'BUY',
-        shares: 25,
-        price_per_share: 175.30,
-        transaction_date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-        notes: 'Quarterly investment'
+        shares: 50, // $7,512.50
+        price_per_share: 150.25,
+        transaction_date: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        notes: 'Initial Apple investment'
       },
       {
         symbol: 'GOOGL',
-        transaction_type: 'SELL',
-        shares: 5,
-        price_per_share: 2950.75,
-        transaction_date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-        notes: 'Profit taking'
+        transaction_type: 'BUY',
+        shares: 5, // $14,000
+        price_per_share: 2800.00,
+        transaction_date: new Date(Date.now() - 40 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        notes: 'Google stock purchase'
+      },
+      {
+        symbol: 'TSLA',
+        transaction_type: 'BUY',
+        shares: 20, // $16,010
+        price_per_share: 800.50,
+        transaction_date: new Date(Date.now() - 35 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        notes: 'Tesla investment'
       },
       {
         symbol: 'MSFT',
         transaction_type: 'BUY',
-        shares: 10,
+        shares: 40, // $12,000
+        price_per_share: 300.00,
+        transaction_date: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        notes: 'Microsoft shares'
+      },
+      {
+        symbol: 'AMZN',
+        transaction_type: 'BUY',
+        shares: 8, // $25,600
+        price_per_share: 3200.00,
+        transaction_date: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        notes: 'Amazon investment'
+      },
+      // Recent transactions
+      {
+        symbol: 'AAPL',
+        transaction_type: 'BUY',
+        shares: 10, // $1,753
+        price_per_share: 175.30,
+        transaction_date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        notes: 'Additional Apple shares'
+      },
+      {
+        symbol: 'GOOGL',
+        transaction_type: 'SELL',
+        shares: 1, // +$2,950.75
+        price_per_share: 2950.75,
+        transaction_date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        notes: 'Profit taking on Google'
+      },
+      {
+        symbol: 'MSFT',
+        transaction_type: 'BUY',
+        shares: 5, // $1,677.50
         price_per_share: 335.50,
         transaction_date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-        notes: 'Dollar cost averaging'
+        notes: 'Dollar cost averaging Microsoft'
       },
       {
         symbol: 'TSLA',
         transaction_type: 'SELL',
-        shares: 10,
+        shares: 3, // +$2,250.75
         price_per_share: 750.25,
         transaction_date: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-        notes: 'Risk management'
+        notes: 'Risk management - partial Tesla sale'
       },
-      {
-        symbol: 'AMZN',
-        transaction_type: 'DIVIDEND',
-        shares: 15,
-        price_per_share: 2.50,
-        transaction_date: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-        notes: 'Quarterly dividend payment'
-      }
     ];
 
+    // Track portfolio state for realistic simulation
+    let currentCashBalance = initialCashBalance;
+    const portfolioAssets = new Map(); // symbol -> {shares, avgPrice}
+
+    // Process transactions in chronological order and update portfolio state
     for (const transaction of transactions) {
       const totalAmount = transaction.shares * transaction.price_per_share;
+      
       try {
+        // Create transaction record
         await TransactionModel.create({
           portfolio_id: portfolioId,
           ...transaction,
           total_amount: totalAmount
         });
+
+        // Update portfolio state
+        if (transaction.transaction_type === 'BUY') {
+          currentCashBalance -= totalAmount;
+          
+          if (portfolioAssets.has(transaction.symbol)) {
+            const existing = portfolioAssets.get(transaction.symbol);
+            const newTotalShares = existing.shares + transaction.shares;
+            const newAvgPrice = (existing.shares * existing.avgPrice + transaction.shares * transaction.price_per_share) / newTotalShares;
+            portfolioAssets.set(transaction.symbol, { shares: newTotalShares, avgPrice: newAvgPrice });
+          } else {
+            portfolioAssets.set(transaction.symbol, { shares: transaction.shares, avgPrice: transaction.price_per_share });
+          }
+        } else if (transaction.transaction_type === 'SELL') {
+          currentCashBalance += totalAmount;
+          
+          if (portfolioAssets.has(transaction.symbol)) {
+            const existing = portfolioAssets.get(transaction.symbol);
+            const newShares = existing.shares - transaction.shares;
+            if (newShares > 0) {
+              portfolioAssets.set(transaction.symbol, { shares: newShares, avgPrice: existing.avgPrice });
+            } else {
+              portfolioAssets.delete(transaction.symbol);
+            }
+          }
+        } else if (transaction.transaction_type === 'DIVIDEND') {
+          currentCashBalance += totalAmount;
+        }
+        
       } catch (error) {
-        console.log(`Transaction might already exist, skipping...`);
+        console.log(`Error processing transaction for ${transaction.symbol}, skipping...`);
       }
     }
-    console.log('💸 Sample transactions added');
+    console.log('💸 Sample transactions processed');
+
+    // Create portfolio assets based on final state with current market prices
+    const currentPrices = {
+      'AAPL': 175.30,
+      'GOOGL': 2950.75,
+      'TSLA': 750.25,
+      'MSFT': 335.50,
+      'AMZN': 3100.25
+    };
+
+    for (const [symbol, asset] of portfolioAssets) {
+      try {
+        await database.insert(`
+          INSERT INTO portfolio_assets 
+          (portfolio_id, symbol, shares, purchase_price, current_price, purchase_date, created_at, updated_at)
+          VALUES (?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))
+        `, [
+          portfolioId, 
+          symbol, 
+          asset.shares, 
+          asset.avgPrice, 
+          currentPrices[symbol] || asset.avgPrice,
+          new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 30 days ago
+        ]);
+      } catch (error) {
+        console.log(`Asset ${symbol} might already exist, skipping...`);
+      }
+    }
+    console.log('📈 Portfolio assets created');
+
+    // Calculate total invested value (cost basis)
+    let totalInvestedValue = 0;
+    for (const [symbol, asset] of portfolioAssets) {
+      totalInvestedValue += asset.shares * asset.avgPrice;
+    }
+
+    // Update portfolio with final values
+    await database.query(`
+      UPDATE portfolios 
+      SET 
+        total_value = ?,
+        cash_balance = ?,
+        updated_at = datetime('now')
+      WHERE id = ?
+    `, [totalInvestedValue, currentCashBalance, portfolioId]);
+
+    console.log(`💰 Portfolio updated - Invested: $${totalInvestedValue.toFixed(2)}, Cash: $${currentCashBalance.toFixed(2)}`);
 
     // Add sample reports
     const reports = [
@@ -169,9 +278,13 @@ async function seedDatabase() {
     console.log('📄 Sample reports added');
 
     console.log('✅ Database seeded successfully!');
+    console.log('\n📊 Portfolio Summary:');
+    console.log(`   Total Invested: $${totalInvestedValue.toLocaleString('en-US', { minimumFractionDigits: 2 })}`);
+    console.log(`   Cash Balance: $${currentCashBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}`);
+    console.log(`   Total Portfolio: $${(totalInvestedValue + currentCashBalance).toLocaleString('en-US', { minimumFractionDigits: 2 })}`);
     console.log('\n🔐 Demo login credentials:');
-    console.log('Email: demo@startupfuel.com');
-    console.log('Password: demo123');
+    console.log('   Email: demo@startupfuel.com');
+    console.log('   Password: demo123');
     
   } catch (error) {
     console.error('❌ Error seeding database:', error);
