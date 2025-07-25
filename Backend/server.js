@@ -19,7 +19,7 @@ const allowedOrigins = [
   "https://d25ug8rmdot9vm.cloudfront.net",
   "http://localhost:5173",
 ];
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl)
     if (!origin) return callback(null, true);
@@ -31,8 +31,17 @@ app.use(cors({
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-}));
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 200,
+};
+
+// Handle preflight OPTIONS requests explicitly
+app.options('*', cors(corsOptions));
+
+// Use CORS for all other requests
+app.use(cors(corsOptions));
+
 // Body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
