@@ -21,7 +21,10 @@ const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins =
       process.env.NODE_ENV === "production"
-        ? ["https://d2aldrsfmmztq3.cloudfront.net/"]
+        ? [
+            "https://d25ug8rmdot9vm.cloudfront.net",
+            "https://d25ug8rmdot9vm.cloudfront.net/",
+          ]
         : ["http://localhost:5173"];
 
     // Allow requests with no origin (like mobile apps or curl requests)
@@ -35,6 +38,20 @@ const corsOptions = {
     }
   },
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-Requested-With",
+    "Accept",
+    "Origin",
+    "Access-Control-Allow-Credentials",
+    "Access-Control-Allow-Headers",
+    "Access-Control-Allow-Methods",
+    "Access-Control-Allow-Origin",
+  ],
+  exposedHeaders: ["set-cookie"],
+  preflightContinue: false,
   optionsSuccessStatus: 200,
 };
 

@@ -4,7 +4,7 @@ const config = {
     baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api',
   },
   production: {
-    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://ec2-35-182-23-242.ca-central-1.compute.amazonaws.com/api',
+    baseURL: import.meta.env.VITE_API_BASE_URL || 'https://d3h3t395jtlnig.cloudfront.net/api',
   }
 };
 
