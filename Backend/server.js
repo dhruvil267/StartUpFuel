@@ -15,24 +15,24 @@ const PORT = process.env.PORT || 3000;
 
 // Security middleware
 app.use(helmet());
-
-const corsOptions = {
-  origin: ["https://d25ug8rmdot9vm.cloudfront.net", "http://localhost:5173"],
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "X-Requested-With",
-    "Accept",
-    "Origin",
-  ],
-  exposedHeaders: ["set-cookie"],
-  preflightContinue: false,
-  optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
+const allowedOrigins = [
+  "https://d25ug8rmdot9vm.cloudfront.net",
+  "http://localhost:5173",
+];
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 // Body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
