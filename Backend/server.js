@@ -38,17 +38,12 @@ const corsOptions = {
     }
   },
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-  allowedHeaders: [
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],  allowedHeaders: [
     "Content-Type",
     "Authorization",
     "X-Requested-With",
     "Accept",
     "Origin",
-    "Access-Control-Allow-Credentials",
-    "Access-Control-Allow-Headers",
-    "Access-Control-Allow-Methods",
-    "Access-Control-Allow-Origin",
   ],
   exposedHeaders: ["set-cookie"],
   preflightContinue: false,
