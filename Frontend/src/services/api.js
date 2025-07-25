@@ -3,8 +3,8 @@ import { API_BASE_URL } from "../config/url.js";
 
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: API_BASE_URL,       // e.g., https://d3h3t395jtlnig.cloudfront.net/api
-  withCredentials: true,       // ⚠️ Important to send cookies/auth info
+  baseURL: API_BASE_URL,
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
