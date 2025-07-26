@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { transactionsAPI } from "../../services/api";
 import { useApi } from "../../hooks/useCommon";
 import {
@@ -13,6 +13,9 @@ const Transactions = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterType, setFilterType] = useState("all");
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // API calls
   const {
     data: transactionsData,

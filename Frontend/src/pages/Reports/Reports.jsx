@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { reportsAPI } from "../../services/api";
 import { useApi } from "../../hooks/useCommon";
 import {
@@ -12,6 +12,9 @@ import {
 import styles from "./Reports.module.css";
 
 const Reports = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // API calls
   const {
     data: reportsData,

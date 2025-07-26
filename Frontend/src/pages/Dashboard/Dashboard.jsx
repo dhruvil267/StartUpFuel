@@ -26,6 +26,7 @@ import {
   Pie,
 } from "recharts";
 import styles from "./Dashboard.module.css";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const { user } = useAuthContext();
@@ -244,9 +245,9 @@ const Dashboard = () => {
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <h3 className={styles.cardTitle}>Recent Transactions</h3>
-              <a href="/transactions" className={styles.cardLink}>
+              <Link to="/transactions" className={styles.cardLink}>
                 View all
-              </a>
+              </Link>
             </div>
             {transactionsLoading ? (
               <div className={styles.spinner}>
@@ -306,15 +307,16 @@ const Dashboard = () => {
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <h3 className={styles.cardTitle}>Recent Reports</h3>
-              <a href="/reports" className={styles.cardLink}>
+              <Link to="/reports" className={styles.cardLink}>
                 View all
-              </a>
+              </Link>
             </div>
             {reportsLoading ? (
               <div className={styles.spinner}>
                 <div className={styles.spinnerIcon}></div>
               </div>
-            ) : (              <div className={styles.reportsList}>
+            ) : (
+              <div className={styles.reportsList}>
                 {reports.map((report) => (
                   <ReportItemDashboard key={report.id} report={report} />
                 ))}
@@ -372,20 +374,18 @@ const ReportItemDashboard = ({ report }) => {
         <div className={styles.reportDetails}>
           <p className={styles.reportTitle}>{report.name}</p>
           <p className={styles.reportDate}>
-            Generated on{" "}
-            {new Date(report.generated_date).toLocaleDateString()}
+            Generated on {new Date(report.generated_date).toLocaleDateString()}
           </p>
         </div>
       </div>
       <div className={styles.reportActions}>
-        <button 
+        <button
           className={styles.reportActionButton}
           disabled={report.status !== "ready"}
           title="View Report"
           onClick={handleView}
-        >
-        </button>
-        <button 
+        ></button>
+        <button
           className={styles.reportActionButton}
           disabled={report.status !== "ready" || downloading}
           title={downloading ? "Downloading..." : "Download Report"}
